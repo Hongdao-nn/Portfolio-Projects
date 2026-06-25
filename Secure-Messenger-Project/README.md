@@ -1,146 +1,125 @@
-# 🔐 SECURE MESSENGER
+# NỀN TẢNG MÔ PHỎNG TRUYỀN TIN MÃ HÓA ĐẦU CUỐI VÀ PHÂN TÍCH MỐI ĐE DỌA AN NINH MẠNG
 
-> **End-to-End Encrypted Platform — Threat-aware Secure Messaging Simulator**
+Secure Messenger là một ứng dụng web mô phỏng hệ thống truyền tin mã hóa đầu cuối (End-to-End Encryption - E2EE), được phát triển nhằm minh họa các khái niệm mật mã học hiện đại kết hợp với kịch bản mô phỏng tấn công thực tế dưới góc nhìn của một chuyên gia an ninh mạng hoặc tin tặc.
 
----
+Dự án kết hợp giao diện trò chuyện trực quan cùng bảng điều khiển giám sát kỹ thuật (Ratchet Monitor) ở giữa, cho phép người dùng trực tiếp quan sát toàn bộ quy trình xử lý dữ liệu mật mã: từ trao đổi khóa Diffie-Hellman, mã hóa AES-256, kiểm tra tính toàn vẹn SHA-256, cho đến kịch bản tấn công XSS và chiếm đoạt tài khoản.
 
-## 📌 Overview
+## Các tính năng chính
 
-**Secure Messenger** is a web application simulating an end-to-end encrypted (E2EE) messaging system, built to demonstrate modern cryptographic concepts and real-world attack scenarios from a hacker's perspective.
+- Trao đổi khóa Diffie-Hellman (DH-256): Mô phỏng quy trình thỏa thuận khóa bí mật giữa Alice và Bob một cách trực quan.
+- Mã hóa AES-256: Mã hóa nội dung tin nhắn bằng thuật toán AES-256 tiêu chuẩn công nghiệp.
+- Mật mã Vigenere: Chế độ mã hóa thay thế tùy chọn để đối chiếu giữa mật mã cổ điển và mật mã đối xứng hiện đại.
+- Kiểm tra tính toàn vẹn SHA-256: Băm dữ liệu truyền đi nhằm xác thực tin nhắn không bị can thiệp hay thay đổi trên đường truyền.
+- Bảng giám sát Ratchet (Ratchet Monitor): Trực quan hóa cơ chế xoay vòng khóa (Double Ratchet) theo thời gian thực mỗi khi gửi hoặc nhận tin nhắn.
+- Bảng điều khiển Hacker (Hacker Console): Mô phỏng các kỹ thuật tấn công XSS và chiếm đoạt phiên làm việc (Session Hijacking) của bên thứ ba (Eve).
+- Giao diện trò chuyện ba cột: Bố cục trực quan hiển thị song song hộp thoại của Alice, Bảng giám sát Ratchet ở giữa và hộp thoại của Bob.
+- Danh bạ liên lạc: Hỗ trợ mã hóa tin nhắn riêng biệt với 8 liên hệ mẫu, bao gồm cả tính năng gửi ảnh mã hóa.
+- Chia sẻ hình ảnh: Tải và chuyển đổi dữ liệu hình ảnh thành dạng mã hóa trước khi truyền tải.
+- Quản lý tài khoản: Chỉnh sửa thông tin cá nhân (tên hiển thị, email, ảnh đại diện) và theo dõi huy chương thành tích.
+- Hỗ trợ song ngữ (Tiếng Việt và Tiếng Anh): Cho phép chuyển đổi giao diện ngôn ngữ tức thời.
+- Chế độ giao diện Sáng / Tối: Thay đổi chủ đề giao diện linh hoạt.
+- Chỉ báo trạng thái hoạt động: Hiển thị trạng thái đã xem (Seen) và bong bóng chỉ báo đang soạn tin nhắn (Typing).
+- Màn hình chào mừng (Splash Screen): Hiệu ứng khởi động giả lập dòng code rơi phong cách điện ảnh.
+- Hiệu ứng nền 3D Parallax: Lớp hình nền chuyển động theo tọa độ con trỏ chuột.
+- Đồng bộ cơ sở dữ liệu Firebase: Kết nối và đồng bộ hóa tin nhắn thời gian thực qua Firebase Realtime Database.
 
-The project combines an intuitive chat interface with a technical control panel (Ratchet Monitor), allowing users to observe the entire encryption pipeline — from Diffie-Hellman key exchange, AES-256 encryption and SHA-256 integrity checks, all the way to XSS attack simulation and account takeover.
+## Kiến trúc mật mã và Luồng dữ liệu
 
----
+Mỗi tin nhắn trong Secure Messenger đều trải qua quy trình mã hóa nghiêm ngặt trước khi được đồng bộ lên cơ sở dữ liệu:
 
-## ✨ Key Features
+1. Người gửi nhập nội dung hoặc chọn tệp tin hình ảnh.
+2. Cơ chế Diffie-Hellman Ratchet thỏa thuận khóa công khai và xoay vòng khóa gốc sau mỗi lượt gửi (sử dụng các tham số mặc định G=5, P=23).
+3. Áp dụng thuật toán mã hóa (AES-256 hoặc Vigenere) dựa trên cấu hình người dùng lựa chọn để tạo bản mã (ciphertext).
+4. Tạo mã băm SHA-256 từ bản mã để đảm bảo tính toàn vẹn dữ liệu.
+5. Đẩy dữ liệu đã mã hóa và mã băm lên Firebase Realtime Database.
+6. Phía người nhận truy xuất bản mã, thực hiện giải mã và đối chiếu mã băm SHA-256 trước khi hiển thị nội dung gốc lên giao diện trò chuyện.
 
-| Feature | Description |
-|---|---|
-| 🔑 **Diffie-Hellman Handshake** | Secret key exchange between Alice and Bob (DH-256) |
-| 🔒 **AES-256 Encryption** | Message encryption using industry-standard AES-256 |
-| 🗝️ **Vigenère Cipher** | Alternative encryption mode using the Vigenère cipher |
-| ✅ **SHA-256 Integrity** | Payload hashing to verify message integrity |
-| ⚙️ **Ratchet Monitor** | Real-time visualization of the Double Ratchet mechanism |
-| 🐛 **Hacker Console** | XSS attack simulation and session hijacking demo |
-| 💬 **3-Column Chat UI** | Side-by-side view: Alice — Ratchet Monitor — Bob |
-| 👥 **Friends List** | Encrypted messaging with 8 contacts, including image support |
-| 🖼️ **Image Sharing** | Upload and send images within any conversation |
-| 👤 **Account Management** | Edit name, email, avatar; view stats and achievement badges |
-| 🌐 **Bilingual (VI / EN)** | Full UI language toggle between Vietnamese and English |
-| 🌗 **Light / Dark Theme** | Instant theme switching |
-| 🔔 **Seen & Typing Indicator** | "Seen" receipts and animated typing bubbles |
-| 🎬 **Splash Screen** | Cinematic boot sequence with code rain effect |
-| 🌊 **Parallax Background** | 3D-layered background that follows the mouse cursor |
-| 🔥 **Firebase Realtime DB** | Live message sync via Firebase Realtime Database |
+![Sơ đồ luồng xử lý mã hóa](assets/crypto_data_flow_diagram.svg)
 
----
+Hình: Quy trình xử lý tuần tự từ phía người gửi, cơ chế DH Ratchet, mã hóa, đồng bộ Firebase, giải mã và hiển thị phía người nhận.
 
-## 🔐 Cryptographic Architecture — Data Flow
+## Kịch bản tấn công mô phỏng của bên thứ ba (Eve)
 
-Every message in Secure Messenger passes through a strict cryptographic pipeline before it reaches the recipient:
+Một điểm nhấn của ứng dụng là chức năng Hacker Console, giúp người dùng quan sát và hiểu rõ cách thức kẻ tấn công (Eve) khai thác điểm yếu của ứng dụng thông qua kỹ thuật XSS và lừa đảo trực tuyến (Phishing).
 
-1. **Sender** types a message or selects an image.
-2. **Diffie-Hellman Ratchet** exchanges public keys and rotates the root key on each send (G=5, P=23).
-3. **Encryption** is applied using AES-256 or Vigenère, depending on the user's choice.
-4. **SHA-256** hashes the payload to ensure data integrity.
-5. **Firebase** stores the encrypted payload in the Realtime Database.
-6. **Receiver** fetches the ciphertext, decrypts it, and verifies the hash before displaying the original message.
+Chuỗi khai thác của Eve được thiết lập như sau:
+1. Đường dẫn lừa đảo: Eve gửi đường dẫn giả mạo và dụ Alice nhấn vào.
+2. Tấn công XSS: Hàm triggerXSSAttack thực hiện tiêm (inject) tin nhắn giả mạo vào giao diện trò chuyện của Alice.
+3. Chiếm quyền giao diện: Giao diện bị phủ một lớp làm tối và một con trỏ chuột giả xuất hiện mô phỏng hành vi điều khiển từ xa của tin tặc.
+4. Hộp thoại xác thực giả mạo: Đối tượng xssModal hiển thị thông báo yêu cầu xác minh bảo mật giả, yêu cầu Alice nhập lại mật khẩu.
+5. Chiếm đoạt tài khoản: Hàm executeAccountTakeover ghi lại thông tin mật khẩu và mô phỏng việc kiểm soát hoàn toàn tài khoản.
+6. Giao diện Terminal ma trận: Hiệu ứng terminal phong cách hacker xuất hiện nhằm tăng tính trực quan cho kịch bản tấn công.
 
-![Crypto Data Flow Diagram](assets/crypto_data_flow_diagram.svg)
+Lưu ý: Kịch bản này được chạy trong môi trường giả lập cô lập (sandbox), hoàn toàn không thu thập hay đánh cắp dữ liệu thực tế của người dùng, phục vụ thuần túy cho mục đích giáo dục.
 
-> *Figure: Full processing pipeline from sender → DH Ratchet → encryption → Firebase → decryption → receiver.*
+![Sơ đồ kịch bản tấn công XSS](assets/eve_hack_attack_flow.svg)
 
----
+Hình: Chuỗi khai thác từ liên kết giả mạo đến chiếm quyền điều khiển và lấy cắp mật khẩu.
 
-## 🕵️ Attack Simulation — The Hacker's View (Eve)
+## Hướng dẫn tương tác
 
-One of Secure Messenger's standout features is the **Hacker Console** — which lets users observe and understand how an attacker (Eve) can exploit security weaknesses in a typical messaging application.
+Ứng dụng tích hợp công cụ hướng dẫn trực quan (sử dụng thư viện Driver.js) để giúp người dùng nhanh chóng làm quen với các phân vùng chức năng. Để kích hoạt hướng dẫn, người dùng có thể nhấn vào biểu tượng dấu chấm hỏi trên thanh điều hướng.
 
-### Eve's Attack Chain
+Các cải tiến độc lập so với bản gốc bao gồm:
+- Tách rời mã nguồn JavaScript và CSS từ trang index.html cũ sang các tệp tin module js/script.js và css/style.css độc lập.
+- Khắc phục các lỗi ghi đè biến toàn cục và xung đột định dạng CSS.
+- Tối ưu hóa hiệu ứng chuyển cảnh của Driver.js để tăng độ mượt mà cho trải nghiệm người dùng.
 
-| Step | Technique | Description |
-|---|---|---|
-| 1 | **Phishing Link** | Eve crafts a fake link and tricks Alice into clicking it |
-| 2 | **XSS Injection** | `triggerXSSAttack()` injects a fake message bubble into Alice's chat view |
-| 3 | **Fake UI Hijack** | Eve takes over the screen — a dark overlay and fake cursor appear, simulating the attacker's actions |
-| 4 | **Fake Password Prompt** | `xssModal` displays a spoofed "security verification" dialog, prompting Alice to re-enter her password |
-| 5 | **Account Takeover** | `executeAccountTakeover()` captures the password and simulates full account compromise |
-| 6 | **Matrix Terminal** | A cyberpunk-style terminal appears, dramatizing the "hack" for the viewer |
+## Công nghệ sử dụng
 
-> 💡 **Educational purpose:** The entire Eve scenario runs safely in a sandboxed environment — no real data is ever stolen. The goal is to help users recognize and guard against social engineering and XSS attacks in the real world.
+- Giao diện và cấu trúc: HTML5, CSS3 (Vanilla CSS), JavaScript (ES Modules).
+- Mật mã học: Thư viện CryptoJS 4.1.1 (AES-256, SHA-256).
+- Đồng bộ dữ liệu: Firebase Realtime Database.
+- Hướng dẫn tương tác: Driver.js 1.0.1.
+- Biểu tượng và Phông chữ: Font Awesome 6, Google Fonts (Quicksand, JetBrains Mono).
 
-![Eve Hack Attack Flow](assets/eve_hack_attack_flow.svg)
+## Hướng dẫn cài đặt và chạy thử
 
-> *Figure: Attack chain from phishing → XSS injection → fake prompt → account takeover, color-coded by Eve's actions (orange), Alice's reactions (purple), and compromised system states (red).*
+### Yêu cầu hệ thống
 
----
+- Thiết bị có kết nối Internet để tải các thư viện từ mạng phân phối nội dung (CDN) và đồng bộ với cơ sở dữ liệu Firebase.
+- Trình duyệt web hiện đại (Google Chrome, Mozilla Firefox, Microsoft Edge hoặc Safari).
 
-## 🧭 Interactive Tutorial
+### Hướng dẫn chạy ứng dụng
 
-The application includes a built-in **interactive guided tour** (powered by [Driver.js](https://driverjs.com/)) to help users explore all features in just a few steps. Click the ❓ button in the navigation bar to launch the tour.
+1. Tải thư mục chứa mã nguồn Secure-Messenger-Project về máy tính.
+2. Đảm bảo thiết bị đã kết nối mạng.
+3. Mở tệp tin index.html bằng trình duyệt web mặc định.
+4. Chờ ứng dụng chạy qua màn hình khởi động (Splash Screen) khoảng 3.6 giây để truy cập trực tiếp vào giao diện chính.
 
-> ⚠️ **Important note:**  
-> The tutorial in this version has been **independently revised and improved** compared to the original group submission. Changes focus on smoother flow, better user guidance, and more detailed step-by-step explanations.
->
-> Additional independent improvements made to this codebase include:
-> - **Clean Architecture refactor:** Fully separated thousands of lines of mixed JavaScript and CSS from the original `index.html` into dedicated module files (`js/script.js` and `css/style.css`), bringing the project to industry standards.
-> - **Bug fixes & optimization:** Resolved duplicate functions, variable overwrites, and CSS conflicts carried over from the original group version.
-> - **Tutorial Tour upgrade:** Reworked the `driver.js` interaction flow for a smoother, more polished experience.
+## Cấu trúc thư mục
 
----
+Kiến trúc thư mục của dự án web được sắp xếp khoa học như sau:
 
-## 🛠️ Tech Stack
-
-- **HTML5 / CSS3 / JavaScript (ES Modules)**
-- **CryptoJS 4.1.1** — AES-256 & SHA-256 encryption
-- **Firebase Realtime Database** — Live message sync
-- **Driver.js 1.0.1** — Interactive guided tour
-- **Font Awesome 6** — Icon library
-- **Google Fonts** — Quicksand, JetBrains Mono
-
----
-
-## 🚀 Getting Started
-
-1. Clone or download the project.
-2. Make sure you have an active Internet connection (required for Firebase + CDN libraries).
-3. Open `index.html` in a modern browser (Chrome, Edge, or Firefox).
-4. Wait for the splash screen to finish loading (~3.6 seconds), then start exploring.
-
-> No additional installation required — all libraries are loaded via CDN.
-
----
-
-## 📁 Project Structure
-
-```
-secure-messenger/
-├── index.html        # Main UI — full page structure
+```text
+.
+├── assets/
+│   ├── crypto_data_flow_diagram.svg  # Sơ đồ luồng xử lý mã hóa dữ liệu đầu cuối
+│   └── eve_hack_attack_flow.svg      # Sơ đồ luồng kịch bản tấn công XSS của Eve
 ├── css/
-│   └── style.css     # All styles (theme, animations, layout)
-└── js/
-    └── script.js     # Encryption logic, Firebase, UI, Tour, i18n
+│   └── style.css                     # Định nghĩa giao diện, màu sắc, hiệu ứng hoạt họa
+├── js/
+│   └── script.js                     # Xử lý mật mã, đồng bộ Firebase, điều khiển UI và đa ngôn ngữ
+├── .gitignore                        # Khai báo các tệp tin hệ thống và cấu hình cần bỏ qua
+├── index.html                        # Cấu trúc giao diện chính của ứng dụng web
+├── LICENSE                           # Bản quyền mã nguồn mở MIT của dự án
+└── README.md                         # Tài liệu hướng dẫn sử dụng và mô tả dự án
 ```
 
----
+## Đội ngũ phát triển
 
-## 👥 Project Team
+Các thành viên tham gia phát triển dự án bao gồm:
 
-| # | Name | Role | Responsibilities |
-|---|---|---|---|
-| 1 | **Đinh Kỳ Vĩ** | 🏆 Team Leader | Proposed the concept and built the core processing pipeline; Developed the demo UI; Optimized the encryption algorithms |
-| 2 | **Nguyễn Ngọc Hồng Đào** | 💻 Member | Refined the user interface (UI/UX); Researched and integrated features; Managed display content |
-| 3 | **Nguyễn Duy Bảo Trân** | 💻 Member | Built the technical proof-of-concept (PoC) in Java; Programmed extended features; Developed Web Modules |
-| 4 | **Nguyễn Bùi Minh Hằng** | 🛡️ Member | Conducted penetration testing (Pen-test); Simulated attack scenarios to validate system security |
-| 5 | **Nguyễn Thị Sang** | 🤝 Member | Participated |
-| 6 | **Đặng Hồng Nguyệt** | 🤝 Member | Participated |
-| 7 | **Hoàng Thị Kim Ngân** | 🤝 Member | Participated |
-| 8 | **Nguyễn Thanh Huyền** | 🤝 Member | Participated |
-| 9 | **Nguyễn Phan Thanh Lịch** | 🤝 Member | Participated |
+- Đinh Kỳ Vĩ (Trưởng nhóm): Đề xuất ý tưởng, xây dựng luồng xử lý mã hóa cốt lõi, phát triển giao diện thử nghiệm và tối ưu hóa thuật toán mật mã.
+- Nguyễn Ngọc Hồng Đào (Thành viên): Hoàn thiện giao diện người dùng (UI/UX), nghiên cứu tích hợp các tính năng bổ trợ và quản lý nội dung hiển thị.
+- Nguyễn Duy Bảo Trân (Thành viên): Xây dựng bản thử nghiệm kỹ thuật (PoC) trên Java, lập trình các tính năng mở rộng và phát triển các mô-đun web.
+- Nguyễn Bùi Minh Hằng (Thành viên): Thực hiện đánh giá an ninh (Penetration Testing), xây dựng và mô phỏng các kịch bản tấn công để kiểm thử độ an toàn của hệ thống.
+- Nguyễn Thị Sang (Thành viên): Đóng góp xây dựng dự án.
+- Đặng Hồng Nguyệt (Thành viên): Đóng góp xây dựng dự án.
+- Hoàng Thị Kim Ngân (Thành viên): Đóng góp xây dựng dự án.
+- Nguyễn Thanh Huyền (Thành viên): Đóng góp xây dựng dự án.
+- Nguyễn Phan Thanh Lịch (Thành viên): Đóng góp xây dựng dự án.
 
----
+## Bản quyền
 
-## 📄 License
-
-This project was developed for academic and information security research purposes.  
-© 2025 Secure Messenger Team. All rights reserved.
+Dự án này được phát triển phục vụ mục đích học tập và nghiên cứu an toàn thông tin. Mã nguồn được cấp phép tự do theo giấy phép MIT. Chi tiết vui lòng tham khảo file LICENSE đính kèm.
