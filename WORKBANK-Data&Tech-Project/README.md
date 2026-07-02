@@ -7,26 +7,23 @@ Dự án này là một ứng dụng dashboard phân tích dữ liệu tương t
 Dự án sử dụng dữ liệu khảo sát người lao động và đánh giá của các chuyên gia để thực hiện:
 - Lọc và phân tích các nhóm nghề nghiệp liên quan đến Công nghệ thông tin (IT) và Dữ liệu.
 - Sử dụng thuật toán phân cụm K-Means để chia nhóm các tác vụ công việc thành 4 vùng rủi ro tự động hóa khác nhau (Safe zone, Stable zone, At-risk zone, Alert zone).
-- Phân nhóm lực lượng lao động thành 4 chân dung nhân sự (Strategic power user, Traditional domain expert, Adaptive tech adopter, Replaceable tech dependent) dựa trên thâm niên, mức lương và hành vi ứng dụng AI trong thực tế.
-- Dự báo xu thế phát triển của tự động hóa đến năm 2030 dựa trên mô hình tăng trưởng lũy tiến và đưa ra lộ trình chuyển đổi kỹ năng.
-- Cung cấp phòng thử nghiệm tương tác cho cá nhân tự đánh giá kỹ năng và cho nhà quản trị mô phỏng rủi ro thích ứng công nghệ của phòng ban tổ chức.
+- Phân tích và dự báo rủi ro tự động hóa của từng tác vụ công việc bằng thuật toán phân cụm K-Means.
+- Tính toán chỉ số sẵn sàng và lộ trình phát triển AI tại Mỹ so với Việt Nam đến năm 2030.
+- Cung cấp la bàn dịch chuyển sự nghiệp dựa trên Chỉ số tương đồng kỹ năng Jaccard và bộ lọc bảo vệ thu nhập.
 
 ## Các tính năng chính
 
-- Trang 1: Bức tranh toàn cảnh (Industry overview)
-  Cung cấp thống kê tổng quan về lực lượng lao động tham gia khảo sát, tỷ lệ phân bổ thâm niên kinh nghiệm làm việc, so sánh tỷ lệ sử dụng LLM theo giới tính và phân tích hiện tượng Dunning-Kruger kỹ thuật số giữa nhóm nhân sự Junior và Senior.
+- Trang 1: Hiện trạng nhân sự và Bản đồ rủi ro công nghiệp
+  Cung cấp thống kê tổng quan về lực lượng lao động IT tham gia khảo sát, tỷ lệ phân bổ thâm niên kinh nghiệm làm việc, và ma trận định vị chiến lược tác vụ bằng thuật toán phân cụm K-Means.
 
-- Trang 2: Kỳ vọng và thực tế (Expectation vs. reality)
-  Trực quan hóa ma trận định vị chiến lược tác vụ bằng thuật toán phân cụm K-Means, chỉ ra các tác vụ có khoảng cách kỳ vọng chênh lệch lớn nhất giữa mong muốn của lập trình viên và năng lực thực tế của AI, đồng thời đối chiếu ranh giới phân cực của các tác vụ cực đoan.
+- Trang 2: Động lực chuyển giao và Tấm khiên phòng ngự con người
+  Đánh giá cường độ động lực thúc đẩy tự động hóa của người lao động, phân tích rào cản phòng thủ phi kỹ thuật (mức độ bất định của công việc và yêu cầu giao tiếp xã hội), và đối chiếu thói quen sử dụng LLM của nhóm Junior vs Senior (Dunning-Kruger/Bẫy năng lực AI).
 
-- Trang 3: Động lực và rào cản (Drivers & barriers)
-  Đánh giá cường độ động lực thúc đẩy tự động hóa của người lao động, phân tích rào cản phòng thủ phi kỹ thuật (mức độ bất định của công việc và yêu cầu giao tiếp xã hội), và biểu diễn tọa độ đa biến các thuộc tính kỹ năng của nhóm tác vụ phân cực.
+- Trang 3: Mô phỏng đà phát triển AI và dự báo rủi ro tác vụ
+  Mô phỏng đà tăng trưởng năng lực tự động hóa lũy tiến của AI Agent tại Mỹ (CAGR 24.1%) và Việt Nam (CAGR 20.0% kết hợp với chỉ số AI Readiness) đến năm 2030, tự động phân loại tác vụ (Lệ thuộc AI, Cộng tác AI, Lõi con người).
 
-- Trang 4: Trục thời gian và dự báo (Temporal & forecasting)
-  Mô phỏng đà tăng trưởng năng lực tự động hóa lũy tiến của AI Agent đến năm 2030 theo thời gian thực. Cung cấp la bàn định hướng và công cụ gợi ý lộ trình chuyển dịch sang các tác vụ có độ bảo vệ cao hơn trong cùng nhóm ngành.
-
-- Trang 5: Phân khúc và định hình chân dung (Human segmentation)
-  Tích hợp la bàn đánh giá vị thế sự nghiệp cá nhân (so sánh trực tiếp với hình mẫu chuyên gia bằng biểu đồ radar đè lớp) và cung cấp hộp cát mô phỏng (Sandbox) sức khỏe nhân sự phòng ban tổ chức, tự động tính toán chỉ số rủi ro thích ứng và đưa ra cảnh báo sớm cùng lộ trình hành động.
+- Trang 4: Hệ thống khuyến nghị dịch chuyển nghề nghiệp và nâng cao kỹ năng
+  Đề xuất top 3 ngành nghề dịch chuyển an toàn dựa trên Chỉ số tương đồng kỹ năng Jaccard và các bộ lọc ràng buộc tối ưu hóa (bảo vệ thu nhập, rủi ro thấp hơn), đồng thời chỉ rõ lộ trình đào tạo (tác vụ sẵn có vs kỹ năng cần học).
 
 ## Hướng dẫn cài đặt và chạy thử
 
@@ -86,15 +83,14 @@ Dự án được tái cấu trúc theo mô hình mô-đun chuẩn như sau:
 │   └── task_statement_with_metadata.csv
 ├── src/
 │   ├── __init__.py          # Khởi tạo package nguồn
-│   ├── data_loader.py       # Tải dữ liệu, lọc ngành nghề, phân cụm K-Means và phân loại chân dung
+│   ├── data_loader.py       # Tải dữ liệu, lọc ngành nghề bằng regex và phân cụm K-Means
 │   ├── ui_components.py     # Chứa các component UI dùng chung và cấu hình biểu đồ Plotly
 │   └── tabs/
 │       ├── __init__.py      # Khởi tạo package các tab giao diện
-│       ├── tab_general.py   # Tab 1: Tổng quan số liệu và thâm niên
-│       ├── tab_demand.py    # Tab 2: Kỳ vọng tự động hóa và ma trận phân cụm
-│       ├── tab_risk.py      # Tab 3: Động lực thúc đẩy và rào cản kỹ năng phi kỹ thuật
-│       ├── tab_vulnerability.py # Tab 4: Dự báo tăng trưởng tự động hóa và la bàn kỹ năng
-│       └── tab_sandbox.py   # Tab 5: La bàn sự nghiệp cá nhân và hộp cát mô phỏng tổ chức
+│       ├── tab_general.py   # Tab 1: Hiện trạng nhân sự và Bản đồ rủi ro công nghiệp
+│       ├── tab_risk.py      # Tab 2: Động lực chuyển giao và Tấm khiên phòng ngự con người
+│       ├── tab_vulnerability.py # Tab 3: Mô phỏng đà phát triển AI và dự báo rủi ro tác vụ
+│       └── tab_recommendation.py # Tab 4: Hệ thống khuyến nghị dịch chuyển nghề nghiệp và nâng cao kỹ năng
 ├── .gitignore               # Khai báo các file bỏ qua không commit lên git
 ├── app.py                   # File khởi chạy chính của dashboard Streamlit
 ├── LICENSE                  # Bản quyền MIT License của dự án
@@ -138,23 +134,20 @@ graph TD
 
     subgraph Dashboard [Giao Diện Dashboard Streamlit]
         Main[app.py - Quản lý Trạng thái & Giao diện]
-        T1[Tab 1: Bức tranh toàn cảnh]
-        T2[Tab 2: Kỳ vọng và thực tế]
-        T3[Tab 3: Động lực và rào cản]
-        T4[Tab 4: Trục thời gian dự báo]
-        T5[Tab 5: Phòng thử nghiệm nhân sự]
+        T1[Tab 1: Hiện trạng nhân sự và Bản đồ rủi ro công nghiệp]
+        T2[Tab 2: Động lực chuyển giao và Tấm khiên phòng ngự]
+        T3[Tab 3: Mô phỏng đà phát triển AI và Dự báo tác vụ]
+        T4[Tab 4: Hệ thống khuyến nghị dịch chuyển nghề nghiệp]
         
         KMeans --> T1
         KMeans --> T2
         KMeans --> T3
         KMeans --> T4
-        Persona --> T5
         
         Main --> T1
         Main --> T2
         Main --> T3
         Main --> T4
-        Main --> T5
     end
 ```
 

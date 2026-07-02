@@ -5,10 +5,10 @@ import os
 THEME_PALETTE = ['#0d5c3a', '#2d845e', '#6bb38a', '#e0a96d', '#f48c06', '#fdba74']
 
 CLUSTER_COLORS = {
-    'Vùng an toàn (Safe zone)': '#0d5c3a',           
-    'Vùng ổn định (Stable zone)': '#3a8d67',         
-    'Vùng tiềm ẩn nguy cơ (At-risk zone)': '#e0a96d', 
-    'Vùng báo động (Alert zone)': '#fdba74'           
+    'Vùng an toàn (Safe zone)': '#10b981',           # Emerald Green (Safe)
+    'Vùng ổn định (Stable zone)': '#3b82f6',         # Blue (Stable)
+    'Vùng tiềm ẩn nguy cơ (At-risk zone)': '#f59e0b', # Amber/Yellow (At-risk)
+    'Vùng báo động (Alert zone)': '#ef4444'           # Red (Alert)
 }
 
 PERSONA_COLORS = {

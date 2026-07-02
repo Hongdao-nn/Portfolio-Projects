@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 import os
+import re
 from sklearn.preprocessing import StandardScaler
 from sklearn.cluster import KMeans
 
@@ -10,6 +11,17 @@ TECH_KEYWORDS = [
     'developer', 'analyst', 'systems', 'ai', 'artificial intelligence',
     'machine learning', 'algorithm'
 ]
+
+def is_tech_job(job):
+    job_lower = str(job).lower()
+    for kw in TECH_KEYWORDS:
+        if kw == 'ai':
+            if re.search(r'\bai\b', job_lower):
+                return True
+        else:
+            if kw in job_lower:
+                return True
+    return False
 
 # LLM Usage columns
 LLM_COLS = [
@@ -71,7 +83,7 @@ def load_and_preprocess_data(data_dir="data"):
     
     # Filter tech occupations
     all_jobs = df_worker_meta['Occupation (O*NET-SOC Title)'].dropna().unique()
-    tech_jobs = [job for job in all_jobs if any(kw in str(job).lower() for kw in TECH_KEYWORDS)]
+    tech_jobs = [job for job in all_jobs if is_tech_job(job)]
     
     df_meta_it = df_worker_meta[df_worker_meta['Occupation (O*NET-SOC Title)'].isin(tech_jobs)].copy()
     df_tasks_it = df_task[df_task['Occupation (O*NET-SOC Title)'].isin(tech_jobs)].copy()
