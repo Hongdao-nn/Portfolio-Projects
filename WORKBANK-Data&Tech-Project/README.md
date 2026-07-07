@@ -1,156 +1,84 @@
-# PHÂN TÍCH TÁC ĐỘNG CỦA AI ĐỐI VỚI NGÀNH CÔNG NGHỆ VÀ DỮ LIỆU
+# Phân tích tác động của trí tuệ nhân tạo đối với lực lượng lao động công nghệ và dữ liệu
 
-Dự án này là một ứng dụng dashboard phân tích dữ liệu tương tác được phát triển bằng Python và Streamlit. Ứng dụng cung cấp các góc nhìn đa chiều về tác động của các mô hình ngôn ngữ lớn (LLM) và các hệ thống AI đối với lực lượng lao động công nghệ và dữ liệu, giúp các cá nhân định vị bản thân và các tổ chức quản trị rủi ro công nghệ hiệu quả.
+Dự án này cung ứng một dashboard mô phỏng động trực quan hóa và định lượng hóa tác động của trí tuệ nhân tạo (AI) đối với thị trường lao động ngành công nghệ thông tin (IT) và dữ liệu. Hệ thống sử dụng thuật toán phân cụm **K-Means** trên dữ liệu tác vụ gốc của **O*NET (Mỹ)** kết hợp với số liệu khảo sát thực tế và mô hình toán học dự báo sự phát triển công nghệ để đưa ra các gợi ý dịch chuyển nghề nghiệp tối ưu cho lao động Việt Nam.
 
-## Mô tả ngắn gọn
+---
 
-Dự án sử dụng dữ liệu khảo sát người lao động và đánh giá của các chuyên gia để thực hiện:
-- Lọc và phân tích các nhóm nghề nghiệp liên quan đến Công nghệ thông tin (IT) và Dữ liệu.
-- Sử dụng thuật toán phân cụm K-Means để chia nhóm các tác vụ công việc thành 4 vùng rủi ro tự động hóa khác nhau (Safe zone, Stable zone, At-risk zone, Alert zone).
-- Phân tích và dự báo rủi ro tự động hóa của từng tác vụ công việc bằng thuật toán phân cụm K-Means.
-- Tính toán chỉ số sẵn sàng và lộ trình phát triển AI tại Mỹ so với Việt Nam đến năm 2030.
-- Cung cấp la bàn dịch chuyển sự nghiệp dựa trên Chỉ số tương đồng kỹ năng Jaccard và bộ lọc bảo vệ thu nhập.
+## Các tính năng cốt lõi của ứng dụng
 
-## Các tính năng chính
+### 1. Hiện trạng nhân sự và bản đồ rủi ro công nghiệp (Dữ liệu gốc O*NET của Mỹ)
+- **Phân bổ kinh nghiệm làm việc:** Trực quan hóa cơ cấu phân phối thâm niên (Junior, Mid, Senior) từ dữ liệu khảo sát thực tế của ngành.
+- **Bản đồ tác vụ K-Means:** Phân cụm toàn bộ các tác vụ công việc thành 4 vùng rủi ro (vùng an toàn, vùng ổn định, vùng tiềm ẩn nguy cơ, và vùng báo động) dựa trên 6 chỉ số đa chiều: khả năng tự động hóa, mong muốn tự động hóa, yêu cầu chuyên môn, mức độ bất định, yêu cầu giao tiếp và mức lương trung bình.
 
-- Trang 1: Hiện trạng nhân sự và Bản đồ rủi ro công nghiệp
-  Cung cấp thống kê tổng quan về lực lượng lao động IT tham gia khảo sát, tỷ lệ phân bổ thâm niên kinh nghiệm làm việc, và ma trận định vị chiến lược tác vụ bằng thuật toán phân cụm K-Means.
+### 2. Động lực chuyển giao và tấm khiên phòng ngự con người (Dữ liệu gốc O*NET của Mỹ)
+- **Động cơ tự động hóa:** Khảo sát cường độ mong muốn chuyển giao tác vụ cho AI của người lao động.
+- **Rào cản phòng ngự phi kỹ thuật:** Trực quan hóa mật độ phân bổ của hai chiều rào cản cốt lõi: mức độ bất định (Involved Uncertainty) và yêu cầu giao tiếp tương tác liên nhân sự (Interpersonal Communication Requirement).
+- **Bẫy năng lực và độ lệch kiểm duyệt (Verification Deficit):** Phân tích so sánh hành vi lạm dụng LLM ở nhóm Junior gây trì trệ phát triển năng lực với cách sử dụng AI như công cụ nhân hiệu suất của nhóm Senior.
+- **Tấm khiên thích ứng:** Biểu đồ so sánh khả năng tự động hóa của các nhóm tác vụ kỹ năng cốt lõi với phối màu theo chủ đề **rừng già (deep forest)** thanh lịch.
 
-- Trang 2: Động lực chuyển giao và Tấm khiên phòng ngự con người
-  Đánh giá cường độ động lực thúc đẩy tự động hóa của người lao động, phân tích rào cản phòng thủ phi kỹ thuật (mức độ bất định của công việc và yêu cầu giao tiếp xã hội), và đối chiếu thói quen sử dụng LLM của nhóm Junior vs Senior (Dunning-Kruger/Bẫy năng lực AI).
+### 3. Mô phỏng đà phát triển AI và dự báo rủi ro tác vụ tại Việt Nam
+- **Mô phỏng đà phát triển AI:** Sử dụng mô hình toán học phát triển hàm số mũ để mô phỏng năng lực AI của Mỹ ($g_{US} = 24.1\%$) và Việt Nam ($g_{VN} = 20.0\%$), tích hợp chênh lệch Chỉ số sẵn sàng AI quốc gia ($K_{Readiness} \approx 67.9\%$).
+- **Sự lệ thuộc công nghệ lõi:** Phân tích các tác động vĩ mô khi Việt Nam phụ thuộc hoàn toàn vào các mô hình AI ngoại nhập (LLM foundation models) đối với thị trường outsourcing lao động IT.
 
-- Trang 3: Mô phỏng đà phát triển AI và dự báo rủi ro tác vụ
-  Mô phỏng đà tăng trưởng năng lực tự động hóa lũy tiến của AI Agent tại Mỹ (CAGR 24.1%) và Việt Nam (CAGR 20.0% kết hợp với chỉ số AI Readiness) đến năm 2030, tự động phân loại tác vụ (Lệ thuộc AI, Cộng tác AI, Lõi con người).
+### 4. Hệ thống khuyến nghị dịch chuyển nghề nghiệp
+- **Chỉ số Độ sẵn sàng Chuyển đổi (Transition Readiness Score - TRS):** Lượng hóa tỷ lệ phần trăm kỹ năng đã có sẵn từ ngành cũ có thể mang sang áp dụng ngay cho ngành mới:
+  $$TRS = 100\% - \text{Gánh nặng Đào tạo lại}$$
+- **Phân rã lộ trình học tập:** Phân loại các tác vụ mới cần học thành nhóm **tác vụ bổ trợ dễ học** và **tác vụ chuyên sâu cần đào tạo** để tránh gây nản lòng cho người lao động.
+- **Khuyến nghị chính sách vĩ mô:** 3 chiến lược quốc gia thiết thực cho Việt Nam (Dịch chuyển chuỗi giá trị IT, Tối ưu hóa lộ trình thích ứng và tăng cường tấm khiên thích ứng quốc gia).
 
-- Trang 4: Hệ thống khuyến nghị dịch chuyển nghề nghiệp và nâng cao kỹ năng
-  Đề xuất top 3 ngành nghề dịch chuyển an toàn dựa trên Chỉ số tương đồng kỹ năng Jaccard và các bộ lọc ràng buộc tối ưu hóa (bảo vệ thu nhập, rủi ro thấp hơn), đồng thời chỉ rõ lộ trình đào tạo (tác vụ sẵn có vs kỹ năng cần học).
+---
 
-## Hướng dẫn cài đặt và chạy thử
+## Cơ sở lý thuyết và Mô hình toán học
 
-### Yêu cầu hệ thống
+### 1. Chỉ số tương đồng kỹ năng Jaccard
+Đo lường mức độ trùng lặp kỹ năng yêu cầu giữa ngành nguồn ($S_{source}$) và ngành mục tiêu ($S_{target}$):
+$$J(S_{source}, S_{target}) = \frac{|S_{source} \cap S_{target}|}{|S_{source} \cup S_{target}|} \times 100\%$$
 
-Hệ thống cần cài đặt sẵn Python phiên bản từ 3.8 trở lên.
+### 2. Mô hình giả lập năng lực AI tại Việt Nam theo thời gian $t$
+$$AI_{VN}(t) = AI_{US}(0) \times K_{Readiness} \times (1 + g_{VN} \times m)^n$$
+- Trong đó $n = t - 2025$.
+- $m$ là hệ số điều chỉnh tốc độ tự động hóa của phân cụm tác vụ K-Means ($m_{Alert} = 1.5$, $m_{At-risk} = 1.2$, $m_{Stable} = 0.8$, $m_{Safe} = 0.5$).
 
-### Các bước cài đặt
+### 3. Bộ lọc ràng buộc chuyển dịch tối ưu
+- **An toàn công nghệ:** $AI_{target}(t) < AI_{source}(t)$
+- **Bảo vệ thu nhập:** $Wage_{target} \ge 85\% \times Wage_{source}$
+- **Tương đồng kỹ năng:** $J(S_{source}, S_{target}) \ge 20\%$ (nới lỏng xuống 10% nếu cần).
 
-1. Tải mã nguồn của dự án về máy tính hoặc clone từ GitHub:
-   ```bash
-   git clone https://github.com/username/project-name.git
-   cd project-name
-   ```
+---
 
-2. Tạo môi trường ảo hóa Python để quản lý thư viện độc lập:
-   ```bash
-   python -m venv .venv
-   ```
-
-3. Kích hoạt môi trường ảo:
-   - Trên Windows (PowerShell):
-     ```powershell
-     .venv\Scripts\Activate.ps1
-     ```
-   - Trên macOS / Linux:
-     ```bash
-     source .venv/bin/activate
-     ```
-
-4. Cài đặt các thư viện phụ thuộc từ file requirements.txt:
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-### Hướng dẫn chạy ứng dụng
-
-Khởi chạy ứng dụng Streamlit tại thư mục gốc của dự án bằng lệnh:
-```bash
-streamlit run app.py
-```
-
-Ứng dụng sẽ tự động mở trên trình duyệt web mặc định tại địa chỉ Local: `http://localhost:8501`.
-
-## Cấu trúc thư mục
-
-Dự án được tái cấu trúc theo mô hình mô-đun chuẩn như sau:
+## Cấu trúc thư mục dự án
 
 ```text
-.
-├── assets/
-│   └── style.css            # File định nghĩa giao diện và các CSS tùy chỉnh
+├── BTCN.py                          # Ứng dụng web Streamlit chính
+├── generate_pdf_report.py           # Chương trình xuất báo cáo phân tích PDF học thuật
 ├── data/
-│   ├── domain_worker_desires.csv
-│   ├── domain_worker_metadata.csv
-│   ├── expert_rated_technological_capability.csv
-│   └── task_statement_with_metadata.csv
-├── src/
-│   ├── __init__.py          # Khởi tạo package nguồn
-│   ├── data_loader.py       # Tải dữ liệu, lọc ngành nghề bằng regex và phân cụm K-Means
-│   ├── ui_components.py     # Chứa các component UI dùng chung và cấu hình biểu đồ Plotly
-│   └── tabs/
-│       ├── __init__.py      # Khởi tạo package các tab giao diện
-│       ├── tab_general.py   # Tab 1: Hiện trạng nhân sự và Bản đồ rủi ro công nghiệp
-│       ├── tab_risk.py      # Tab 2: Động lực chuyển giao và Tấm khiên phòng ngự con người
-│       ├── tab_vulnerability.py # Tab 3: Mô phỏng đà phát triển AI và dự báo rủi ro tác vụ
-│       └── tab_recommendation.py # Tab 4: Hệ thống khuyến nghị dịch chuyển nghề nghiệp và nâng cao kỹ năng
-├── .gitignore               # Khai báo các file bỏ qua không commit lên git
-├── app.py                   # File khởi chạy chính của dashboard Streamlit
-├── LICENSE                  # Bản quyền MIT License của dự án
-├── requirements.txt         # Danh sách các thư viện Python phụ thuộc
-└── README.md                # Tài liệu hướng dẫn sử dụng dự án
+│   ├── task_statement_with_metadata.csv  # Dữ liệu tác vụ O*NET gốc
+│   ├── expert_rated_technological_capability.csv # Đánh giá năng lực tự động hóa chuyên gia
+│   └── domain_worker_metadata.csv   # Dữ liệu khảo sát nhân sự và thâm niên IT
+├── Báo cáo phân tích tác động của trí tuệ nhân tạo đối với lực lượng lao động công nghệ và dữ liệu.pdf # Báo cáo PDF Times New Roman được sinh tự động
+└── README.md                        # Hướng dẫn dự án bằng tiếng Việt
 ```
 
-## Sơ đồ luồng dữ liệu (Dataflow)
+---
 
-Luồng dữ liệu trong dự án được tổ chức và luân chuyển như sau:
+## Hướng dẫn cài đặt và Khởi chạy
 
-```mermaid
-graph TD
-    subgraph Ingestion [Tải Dữ Liệu]
-        D1[(domain_worker_desires.csv)]
-        D2[(domain_worker_metadata.csv)]
-        D3[(expert_rated_technological_capability.csv)]
-        D4[(task_statement_with_metadata.csv)]
-    end
-
-    subgraph Preprocessing [Xử Lý & Lọc Dữ Liệu]
-        Filter[Lọc ngành công nghệ bằng từ khóa]
-        Merge[Gộp dữ liệu tác vụ và người lao động]
-        Scale[Chuẩn hóa dữ liệu bằng StandardScaler]
-        
-        D1 --> Filter
-        D2 --> Filter
-        D3 --> Filter
-        D4 --> Filter
-        Filter --> Merge
-        Merge --> Scale
-    end
-
-    subgraph Modeling [Mô Hình Hóa]
-        KMeans[Thuật toán phân cụm K-Means chia 4 vùng rủi ro]
-        Persona[Phân loại 4 chân dung thích ứng AI của con người]
-        
-        Scale --> KMeans
-        Merge --> Persona
-    end
-
-    subgraph Dashboard [Giao Diện Dashboard Streamlit]
-        Main[app.py - Quản lý Trạng thái & Giao diện]
-        T1[Tab 1: Hiện trạng nhân sự và Bản đồ rủi ro công nghiệp]
-        T2[Tab 2: Động lực chuyển giao và Tấm khiên phòng ngự]
-        T3[Tab 3: Mô phỏng đà phát triển AI và Dự báo tác vụ]
-        T4[Tab 4: Hệ thống khuyến nghị dịch chuyển nghề nghiệp]
-        
-        KMeans --> T1
-        KMeans --> T2
-        KMeans --> T3
-        KMeans --> T4
-        
-        Main --> T1
-        Main --> T2
-        Main --> T3
-        Main --> T4
-    end
+### 1. Cài đặt các thư viện cần thiết
+Dự án yêu cầu Python 3.10 trở lên. Hãy cài đặt các thư viện phụ thuộc bằng lệnh:
+```bash
+pip install streamlit pandas numpy matplotlib plotly scikit-learn reportlab pillow
 ```
 
-## Bản quyền
+### 2. Sinh báo cáo phân tích dạng PDF
+Để tạo tệp báo cáo PDF bằng font **Times New Roman** (không chứa icon, định dạng Sentence case chuẩn), hãy chạy lệnh:
+```bash
+python generate_pdf_report.py
+```
+Tập lệnh sẽ kết xuất tệp PDF chuyên nghiệp trực tiếp vào gốc thư mục dự án để ứng dụng Streamlit có thể đọc và cho phép người dùng tải xuống trực tuyến.
 
-Dự án này được phân phối dưới dạng mã nguồn mở theo các điều khoản của MIT License. Chi tiết vui lòng tham khảo file LICENSE đính kèm.
+### 3. Chạy ứng dụng Streamlit Dashboard
+Khởi chạy giao diện phân tích động trên trình duyệt cục bộ của bạn bằng lệnh:
+```bash
+streamlit run BTCN.py
+```
+Giao diện sẽ tự động đồng bộ hóa các bộ lọc Sidebar và cung cấp nút **"Tải báo cáo phân tích PDF"** ở sidebar để người dùng tải tệp báo cáo PDF vừa sinh.

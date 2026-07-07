@@ -1,0 +1,19 @@
+Gender breakdown:
+                       mean  count
+Gender                            
+Female             3.362928    167
+Male               3.414731    287
+Other              5.000000      1
+Prefer not to say  3.475000     10
+
+Education breakdown:
+                                        mean  count
+Education                                          
+Associate Degree                    3.501714     25
+Bachelor’s Degree                   3.419671    209
+Doctorate (e.g., PhD)               3.138624     20
+High School                         3.277513     15
+Master’s Degree                     3.399688    132
+Prefer not to say                   3.396825      7
+Professional Degree (e.g., MD, JD)  3.267857      4
+Some College, No Degree             3.426216     53

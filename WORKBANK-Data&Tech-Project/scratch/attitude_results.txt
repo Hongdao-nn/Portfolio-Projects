@@ -1,0 +1,6 @@
+AI Suffering Attitude                                           Neither agree nor disagree  Somewhat agree  Somewhat disagree  Strongly agree  Strongly disagree
+Chân dung nhân sự                                                                                                                                               
+Chuyên gia chuyên môn truyền thống (Traditional domain expert)                   26.373626       15.384615          30.769231        9.890110          17.582418
+Chuyên gia tích hợp chiến lược (Strategic power user)                            18.021201       16.961131          29.328622        9.893993          25.795053
+Nhân sự lệ thuộc công nghệ (Replaceable tech dependent)                          17.948718       20.512821          28.205128        5.128205          28.205128
+Nhân sự nhạy bén công nghệ (Adaptive tech adopter)                               24.528302       18.867925          26.415094       11.320755          18.867925
