@@ -1,5 +1,0 @@
-                                  Phân vùng nghịch lý  Mức độ yêu thích  Kỹ năng cốt lõi  An toàn công việc  Số lượng tác vụ
-0    Vùng an toàn tự nhiên (Desire < 3, Capacity < 3)          3.262078         3.339212           2.499714               27
-1  Vùng kháng cự chủ động (Desire < 3, Capacity >= 3)          2.887897         3.138830           2.276407               80
-2    Vùng kỳ vọng quá mức (Desire >= 3, Capacity < 3)          2.795117         3.329652           2.129806               36
-3        Vùng đồng thuận (Desire >= 3, Capacity >= 3)          2.750321         3.179784           2.234673              145
