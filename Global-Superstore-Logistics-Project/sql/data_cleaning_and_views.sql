@@ -93,7 +93,7 @@ SELECT
     CASE
         WHEN Ship_Mode = 'Same Day' THEN 0
         WHEN Ship_Mode = 'First Class' THEN 2
-        WHEN Ship_Mode = 'Second Class' THEN 2
+        WHEN Ship_Mode = 'Second Class' THEN 4
         ELSE 6
     END AS SLA_Target_Days
 FROM clean_sales;

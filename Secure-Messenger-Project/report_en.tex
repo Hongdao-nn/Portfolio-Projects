@@ -1,0 +1,211 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{geometry}
+\usepackage{booktabs}
+\usepackage{listings}
+\usepackage{xcolor}
+
+\geometry{a4paper, margin=1in}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Secure Messenger Project Report},
+    pdfpagemode=FullScreen,
+}
+
+\lstset{
+    backgroundcolor=\color{lightgray!10},
+    basicstyle=\ttfamily\small,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+\title{
+    \textbf{INFORMATION TECHNOLOGY PROJECT REPORT}\\
+    [0.5cm]
+    \Large{An End-to-End Encrypted (E2EE) Messaging Simulator \\ and Cyber Threat Analysis Platform}\\
+    [1cm]
+    \large{\textbf{Project: Secure Messenger}}
+}
+
+\author{
+    \textbf{Development Team:} \\
+    Dinh Ky Vi (Team Leader) \\
+    Nguyen Ngoc Hong Dao (Member - UI/UX \& Frontend) \\
+    Nguyen Duy Bao Tran (Member - PoC Developer) \\
+    Nguyen Bui Minh Hang (Member - Security Specialist) \\
+    Nguyen Thi Sang, Dang Hong Nguyet \\
+    Hoang Thi Kim Ngân, Nguyen Thanh Huyen, Nguyen Phan Thanh Lich
+}
+
+\date{July 2026}
+
+\begin{document}
+
+\maketitle
+\newpage
+
+\begin{abstract}
+This report presents the design and implementation of the \textbf{Secure Messenger} project -- a web application that simulates a real-time End-to-End Encrypted (E2EE) messaging system. Developed primarily for educational purposes, the project helps students and security researchers gain a deeper understanding of modern cryptographic protocols such as the Diffie-Hellman Key Exchange, AES-256 symmetric encryption, and the Double Ratchet key rotation mechanism. Furthermore, the application integrates a simulated third-party threat scenario (Eve's Hacker Console) to visually demonstrate the dangers of Cross-Site Scripting (XSS) and session hijacking/account takeover. The entire communication payload is synchronized in real-time using Firebase Realtime Database.
+\end{abstract}
+
+\tableofcontents
+\newpage
+
+\section{Introduction}
+\subsection{Project Background}
+In the digital age, securing communication channels is a paramount requirement for both individuals and organizations. End-to-End Encryption (E2EE) has emerged as the gold standard for popular messaging applications like Signal, WhatsApp, and Telegram. However, for most general users and computer science students, the underlying mathematical structures and data processing pipelines of E2EE remain highly abstract.
+
+\subsection{Project Objectives}
+The \textbf{Secure Messenger} project was established to address the following key objectives:
+\begin{itemize}
+    \item Visualize the mathematical mechanics of cryptography (specifically Diffie-Hellman and Double Ratchet) through real-time charts and data chips.
+    \item Provide a secure testing environment (sandbox) to experience a realistic cyber threat scenario.
+    \item Develop a fully functional Web application with a fluid Vanilla CSS/JS frontend integrated with a Cloud Database (Firebase) for message transport.
+\end{itemize}
+
+---
+
+\section{Cryptographic Architecture and Core Mechanisms}
+The cryptographic framework of Secure Messenger relies on a tight integration of asymmetric key exchange and symmetric key encryption algorithms.
+
+\subsection{Diffie-Hellman Key Exchange (DH-256)}
+The Diffie-Hellman key exchange protocol allows two parties to establish a shared secret key over an insecure communication channel without prior knowledge of each other.
+The default parameters in this simulation are a prime number $P = 23$ and a generator $G = 5$.
+\begin{enumerate}
+    \item Alice selects a random private integer $X_A$ (e.g., $X_A = 6$) and computes her public key:
+    \begin{equation}
+        Y_A = G^{X_A} \pmod P = 5^6 \pmod{23} = 8
+    \end{equation}
+    \item Bob selects a random private integer $X_B$ (e.g., $X_B = 15$) and computes his public key:
+    \begin{equation}
+        Y_B = G^{X_B} \pmod P = 5^{15} \pmod{23} = 19
+    \end{equation}
+    \item The Shared Secret Key $K$ is computed independently by both parties:
+    \begin{equation}
+        K = Y_B^{X_A} \pmod P = 19^6 \pmod{23} = 2
+    \end{equation}
+    \begin{equation}
+        K = Y_A^{X_B} \pmod P = 8^{15} \pmod{23} = 2
+    \end{equation}
+\end{enumerate}
+This shared secret key $K$ is then passed as the key for symmetric block cipher encryption.
+
+\subsection{Double Ratchet Mechanism}
+Simulating the Double Ratchet protocol (modeled after the Signal Protocol), the application automatically rotates the session keys upon sending or receiving messages. This guarantees Perfect Forward Secrecy (PFS) -- ensuring that even if an attacker compromises a current session key, they cannot decrypt past messages or future traffic.
+
+\subsection{AES-256 Symmetric Encryption}
+Upon key generation or rotation, message payloads are encrypted using the Advanced Encryption Standard (AES) with a 256-bit key length. The application uses the CBC (Cipher Block Chaining) mode and PKCS7 padding via the \texttt{CryptoJS} library. The Initialization Vector (IV) is synchronized to ensure accurate decryption at the receiver end.
+
+\subsection{SHA-256 Integrity Verification}
+To prevent Man-in-the-Middle (MitM) tampering, the sender computes the SHA-256 hash of the ciphertext prior to transmission:
+\begin{equation}
+    \text{Hash} = \text{SHA256}(\text{Ciphertext})
+\end{equation}
+The receiver computes the hash of the received ciphertext and compares it with the sent hash. If they match, the ciphertext is confirmed to be untampered and is decrypted; otherwise, the UI flags a data manipulation warning.
+
+---
+
+\section{User Interface and Technical Monitoring}
+\subsection{Three-Column Layout}
+The Secure Messenger interface is built natively using HTML5 and Vanilla CSS, optimizing layout space to show:
+\begin{itemize}
+    \item \textbf{Left Column (Alice's View)}: Chat window for Alice.
+    \item \textbf{Middle Column (Ratchet Monitor)}: Real-time visualization of key derivations, session keys, SHA-256 hashes, and database payload schema.
+    \item \textbf{Right Column (Bob's View)}: Chat window for Bob.
+\end{itemize}
+
+\subsection{Ratchet Monitor Dashboard}
+The monitor provides instant feedback on cryptographic state transitions. Glowing glassmorphic chips reflect changes in real-time, helping users correlate UI actions with low-level cryptographic operations.
+
+---
+
+\section{Cyber Threat Simulation Scenario}
+A defining feature of the application is the integration of the \textbf{Hacker Console} under the persona of the eavesdropper, Eve.
+
+\subsection{XSS Exploitation Chain}
+The simulated Cross-Site Scripting (XSS) attack runs as follows:
+\begin{enumerate}
+    \item \textbf{Malicious Link}: Eve sends a phishing link to Alice.
+    \item \textbf{Payload Execution}: Alice clicks the link, triggering DOM injection.
+    \item \textbf{Remote Cursor Control}: A fake mouse cursor appears on Alice's screen and moves autonomously, simulating a remote desktop compromise.
+\end{enumerate}
+
+\subsection{Phishing Modal and Session Hijacking}
+Following the cursor takeover, a fake security verification dialog (\textit{Fake Login Modal}) overlays Alice's workspace. Once Alice enters her credentials:
+\begin{itemize}
+    \item The console transmits the password to Eve's hacker interface.
+    \item Eve's command-line interface (styled with a green matrix terminal font) updates to show the successful compromise and flags an \textit{Account Takeover Success}.
+\end{itemize}
+
+---
+
+\section{Tech Stack and Contribution Roles}
+\subsection{Technology Stack}
+The application relies on lightweight, standard web libraries to maintain near-instant loading times:
+\begin{itemize}
+    \item \textbf{Frontend}: HTML5, CSS3, JavaScript ES Modules.
+    \item \textbf{Cryptography}: \texttt{CryptoJS v4.1.1}.
+    \item \textbf{Onboarding}: \texttt{Driver.js v1.0.1} (interactive tour guide).
+    \item \textbf{Database}: \texttt{Firebase Realtime Database}.
+\end{itemize}
+
+\subsection{Team Contribution Roles}
+\begin{table}[h]
+\centering
+\caption{Task Allocation Matrix}
+\begin{tabular}{llp{6.5cm}}
+\toprule
+\textbf{Member} & \textbf{Core Role} & \textbf{Key Contributions} \\
+\midrule
+Dinh Ky Vi & Project Leader & Core crypto algorithms, E2EE data flows \\
+Nguyen Ngoc Hong Dao & UI/UX \& Frontend & Interface design, transitions, and translation \\
+Nguyen Duy Bao Tran & Integrator \& PoC & Java POC simulation, Firebase sync wiring \\
+Nguyen Bui Minh Hang & Security Specialist & XSS attack scenario and Hacker Console \\
+Support Group & QA \& Copywriting & Test cases, slides, and documentation \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+---
+
+\section{Conclusion and Future Work}
+\subsection{Project Outcomes}
+The \textbf{Secure Messenger} project successfully visualizes End-to-End Encryption and highlights web security vulnerabilities via simulated XSS execution. The tool is highly effective as an educational utility for showing how modern transport channels can be secured mathematically yet compromised through user-facing attack vectors.
+
+\subsection{Future Directions}
+Future expansions for the platform include:
+\begin{itemize}
+    \item Allowing users to customize Diffie-Hellman group parameters (e.g., DH-512 or DH-1024).
+    \item Adding MitM intercept nodes in the network flow visualization.
+    \item Implementing WebRTC for actual browser-to-browser P2P communication.
+\end{itemize}
+
+\newpage
+\begin{thebibliography}{9}
+\bibitem{diffie-hellman}
+W. Diffie and M. Hellman, ``New directions in cryptography,'' in \emph{IEEE Transactions on Information Theory}, vol. 22, no. 6, pp. 644-654, November 1976.
+\bibitem{aes-standard}
+National Institute of Standards and Technology (NIST), ``FIPS PUB 197: Advanced Encryption Standard (AES),'' November 2001.
+\bibitem{double-ratchet}
+T. Perrin and D. Whisper Systems, ``The Double Ratchet Algorithm,'' 2016. [Online]. Available: \url{https://signal.org/docs/specifications/doubleratchet/}
+\end{thebibliography}
+
+\end{document}

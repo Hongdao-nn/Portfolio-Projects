@@ -1,0 +1,22 @@
+# Ignore large CSV files in data directory
+data/*.csv
+
+# Except the product category translation dataset (small file)
+!data/product_category_name_translation.csv
+
+# Python caches and notebook checkpoints
+__pycache__/
+*.py[cod]
+*$py.class
+.ipynb_checkpoints/
+
+# Virtual environments
+.venv/
+venv/
+env/
+IPYNB_DEP/
+
+# Operating system files
+Thumbs.db
+Desktop.ini
+.DS_Store
