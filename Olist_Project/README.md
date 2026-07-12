@@ -6,7 +6,7 @@ This project performs a comprehensive end-to-end data analytics workflow on a pu
 
 ---
 
-## 📌 Business Questions Addressed
+## Business Questions Addressed
 
 This project solves 5 core e-commerce business problems:
 
@@ -17,9 +17,9 @@ This project solves 5 core e-commerce business problems:
 ### 2. Customer Segmentation (RFM Analysis)
 * **Objective**: Categorize customers into actionable groups (e.g., Champions, Loyalists, At Risk) to optimize marketing spend.
 * **Solution**: Calculated three key metrics per unique customer:
-  * **Recency**: Days since the last purchase.
-  * **Frequency**: Total number of unique orders placed.
-  * **Monetary**: Total amount spent.
+  * Recency: Days since the last purchase.
+  * Frequency: Total number of unique orders placed.
+  * Monetary: Total amount spent.
 
 ### 3. Shipping Lag Impact on Customer Satisfaction (SLA vs. Review Scores)
 * **Objective**: Quantify the impact of delivery delays on customer experience.
@@ -35,7 +35,7 @@ This project solves 5 core e-commerce business problems:
 
 ---
 
-## 📊 Database Schema (ERD)
+## Database Schema (ERD)
 
 The relational database schema designed for this project is illustrated below. The source schema is saved in [olist.pgerd](file:///d:/GITHUB_PROJECT/Portfolio-Projects/Olist_Project/olist.pgerd) (openable in pgAdmin 4).
 
@@ -123,7 +123,7 @@ erDiagram
 
 ---
 
-## 📂 Project Structure
+## Project Structure
 
 ```text
 Olist_Project/
@@ -147,10 +147,10 @@ Olist_Project/
 
 ---
 
-## 📈 Key Insights & Business Recommendations
+## Key Insights & Business Recommendations
 
 ### 1. Revenue Trends & Seasonality
-* **Insight**: Monthly sales peaked in **November 2017** due to Black Friday, hitting over **1.1 Million BRL**. The cumulative revenue shows a steep, healthy linear growth trajectory.
+* **Insight**: Monthly sales peaked in **November 2017** due to Black Friday, hitting over **1.1 Million BRL**. The cumulative revenue shows a steady linear growth trajectory.
 * **Action**: Prepare logistics and marketing budgets at least 3 months ahead of Q4 to handle seasonal spikes.
 
 ![Monthly Revenue Trend](file:///d:/GITHUB_PROJECT/Portfolio-Projects/Olist_Project/images/monthly_revenue_trend.png)
@@ -163,7 +163,7 @@ Olist_Project/
 
 ### 3. Critical Value of Logistics (SLA Adherence)
 * **Insight**: Deliveries made **On Time** score an average of **4.30 / 5.0** in reviews. However, **Late** deliveries collapse the average score to **1.49 / 5.0**.
-* **Action**: Logistics is a life-or-death metric for Olist. The platform should penalize sellers who are slow to ship and establish SLA contracts with courier partners.
+* **Action**: Logistics is a critical metric for Olist. The platform should penalize sellers who are slow to ship and establish SLA contracts with courier partners.
 
 ![Delivery Impact on Reviews](file:///d:/GITHUB_PROJECT/Portfolio-Projects/Olist_Project/images/delivery_impact_reviews.png)
 
@@ -179,7 +179,7 @@ Olist_Project/
 
 ---
 
-## 🚀 How to Run the Project
+## How to Run the Project
 
 ### 1. Data Preparation
 The raw dataset exceeds 120MB and is excluded via `.gitignore`. 
@@ -206,20 +206,20 @@ The raw dataset exceeds 120MB and is excluded via `.gitignore`.
 
 ---
 
-## 📜 License
+## License
 This project is licensed under the MIT License.
 
 ---
 
 <details>
-<summary>🇻🇳 Bản tiếng Việt (Vietnamese Version)</summary>
+<summary>Bản tiếng Việt (Vietnamese Version)</summary>
 
 ## PHÂN TÍCH HIỆU SUẤT KINH DOANH VÀ HÀNH VI KHÁCH HÀNG TRÊN NỀN TẢNG OLIST
 
 Dự án này thực hiện quy trình phân tích dữ liệu toàn diện (End-to-End) trên bộ dữ liệu TMĐT thực tế của Olist (Brazil). Dự án kết hợp PostgreSQL để thiết kế database và xử lý truy vấn phức tạp, cùng Python (Pandas, Seaborn) để phân tích RFM, Cohort và trực quan hóa các phát hiện nghiệp vụ nhằm tối ưu vận hành.
 
 ### Các bài toán giải quyết:
-1. Xu hướng doanh thu theo tháng và lũy kế.
+1. Xu xu hướng doanh thu theo tháng và lũy kế.
 2. Phân khúc khách hàng RFM (Recency, Frequency, Monetary).
 3. Đánh giá tác động giao hàng trễ đến điểm review của khách hàng.
 4. Top 10 danh mục sản phẩm mang lại doanh thu cao nhất.

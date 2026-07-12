@@ -6,22 +6,22 @@ Each project is structured to solve real-world business challenges—ranging fro
 
 ---
 
-## 🚀 Projects Overview
+## Projects Overview
 
 Here is a summary of the projects included in this repository:
 
 | Project | Domain | Tech Stack | Key Analytics Methods |
 | :--- | :--- | :--- | :--- |
-| 📊 [Logistics & SLA Performance](file:///d:/GITHUB_PROJECT/Portfolio-Projects/Global-Superstore-Logistics-Project) | Supply Chain / Retail | SQL Server, Power BI, PDF Reporting | ETL, SLA Compliance, Cost-Priority Optimization |
-| 🛒 [E-commerce Customer & Retention Analysis](file:///d:/GITHUB_PROJECT/Portfolio-Projects/Olist_Project) | E-commerce Marketplace | PostgreSQL, Python, Pandas, Seaborn | RFM Segmentation, Cohort Retention Analysis |
-| 🧠 [AI Impact on Tech Workforce Dashboard](file:///d:/GITHUB_PROJECT/Portfolio-Projects/WORKBANK-Data-Tech-Project) | HR Tech / Labor Market | Python, Streamlit, Scikit-Learn, Plotly | K-Means Clustering, Jaccard Similarity Index |
-| 🔐 [Secure Messenger Cryptography App](file:///d:/GITHUB_PROJECT/Portfolio-Projects/Secure-Messenger-Project) | Cyber Security (Side Project) | HTML, CSS, JavaScript, Firebase | Cryptographic simulation (AES-256, DH Key Exchange) |
+| [Logistics & SLA Performance](file:///d:/GITHUB_PROJECT/Portfolio-Projects/Global-Superstore-Logistics-Project) | Supply Chain / Retail | SQL Server, Power BI, PDF Reporting | ETL, SLA Compliance, Cost-Priority Optimization |
+| [E-commerce Customer & Retention Analysis](file:///d:/GITHUB_PROJECT/Portfolio-Projects/Olist_Project) | E-commerce Marketplace | PostgreSQL, Python, Pandas, Seaborn | RFM Segmentation, Cohort Retention Analysis |
+| [AI Impact on Tech Workforce Dashboard](file:///d:/GITHUB_PROJECT/Portfolio-Projects/WORKBANK-Data-Tech-Project) | HR Tech / Labor Market | Python, Streamlit, Scikit-Learn, Plotly | K-Means Clustering, Jaccard Similarity Index |
+| [Secure Messenger Cryptography App](file:///d:/GITHUB_PROJECT/Portfolio-Projects/Secure-Messenger-Project) | Cyber Security (Side Project) | HTML, CSS, JavaScript, Firebase | Cryptographic simulation (AES-256, DH Key Exchange) |
 
 ---
 
-## 📂 Deep Dive Into Projects
+## Deep Dive Into Projects
 
-### 1. 📊 Supply Chain & Logistics SLA Optimization
+### 1. Supply Chain & Logistics SLA Optimization
 * **Goal**: Analyze logistics performance and evaluate Service Level Agreement (SLA) compliance to identify bottlenecks and optimize shipping costs.
 * **Architecture**: 
   * **SQL Server**: Built clean views (`clean_sales`, `logistics_performance`) to handle NULLs, anomalous values, and compute shipping lag.
@@ -29,7 +29,7 @@ Here is a summary of the projects included in this repository:
 * **Business Insights**: Identified key geographic regions causing shipping delays and correlated high-cost carrier modes with low-priority orders.
 * **Go to Project**: [Global-Superstore-Logistics-Project](file:///d:/GITHUB_PROJECT/Portfolio-Projects/Global-Superstore-Logistics-Project)
 
-### 2. 🛒 E-commerce Customer Lifetime Value & Retention Analysis (Olist Brazil)
+### 2. E-commerce Customer Lifetime Value & Retention Analysis (Olist Brazil)
 * **Goal**: Analyze a massive e-commerce dataset containing 100k+ orders to evaluate business growth, customer behavior, and logistics impact.
 * **Key Analyses**:
   * **RFM Segmentation**: Classified customers into segments based on Recency, Frequency, and Monetary metrics.
@@ -38,7 +38,7 @@ Here is a summary of the projects included in this repository:
 * **Tech Stack**: PostgreSQL (CTEs, Window Functions), Python (Pandas, Seaborn, Matplotlib for data visualization).
 * **Go to Project**: [Olist_Project](file:///d:/GITHUB_PROJECT/Portfolio-Projects/Olist_Project)
 
-### 3. 🧠 AI Impact on Tech Workforce & Career Transition Modeling
+### 3. AI Impact on Tech Workforce & Career Transition Modeling
 * **Goal**: Quantify the automation risk of AI on tech and data jobs and suggest optimal transition pathways for workers in Vietnam.
 * **Key Features**:
   * **K-Means Clustering**: Segmented ONET work tasks into 4 risk levels (Safe, Stable, At-Risk, Alarm) based on automation potential and required skills.
@@ -46,14 +46,14 @@ Here is a summary of the projects included in this repository:
   * **Streamlit App**: Deployed a fully interactive dashboard showing dynamic simulations of AI capability growth rates.
 * **Go to Project**: [WORKBANK-Data-Tech-Project](file:///d:/GITHUB_PROJECT/Portfolio-Projects/WORKBANK-Data-Tech-Project)
 
-### 4. 🔐 Secure Messenger Cryptography Simulation (Software Engineering Side-Project)
+### 4. Secure Messenger Cryptography Simulation (Software Engineering Side-Project)
 * **Goal**: Built an interactive web chat simulating End-to-End Encryption (E2EE) and cyberattack scenarios to demonstrate cryptography principles.
 * **Tech Stack**: Pure HTML/CSS/JS frontend, Firebase Realtime Database.
 * **Go to Project**: [Secure-Messenger-Project](file:///d:/GITHUB_PROJECT/Portfolio-Projects/Secure-Messenger-Project)
 
 ---
 
-## 🛠 Tech Stack & Core Competencies
+## Tech Stack & Core Competencies
 
 * **Languages**: SQL (PostgreSQL, SQL Server), Python (Pandas, NumPy, Scikit-Learn, Plotly, Streamlit), HTML/CSS/JavaScript
 * **Data Visualization / BI**: Power BI Desktop, Seaborn, Matplotlib
